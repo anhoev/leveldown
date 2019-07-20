@@ -1,6 +1,16 @@
 const util = require('util')
 const AbstractLevelDOWN = require('abstract-leveldown').AbstractLevelDOWN
-const binding = require('./binding')
+let binding;
+try {
+    binding = require('bindings')('leveldown').leveldown
+} catch (e) {
+    try {
+        binding = process.binding('leveldown').leveldown
+    } catch (e) {
+        const native_lib_path = path.join(process.cwd(), 'leveldown.node');
+        binding = require(native_lib_path).leveldown;
+    }
+}
 const ChainedBatch = require('./chained-batch')
 const Iterator = require('./iterator')
 
