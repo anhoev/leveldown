@@ -1,5 +1,6 @@
 const util = require('util')
 const AbstractLevelDOWN = require('abstract-leveldown').AbstractLevelDOWN
+const path = require('path')
 let binding;
 try {
     binding = require('bindings')('leveldown').leveldown
